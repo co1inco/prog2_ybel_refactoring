@@ -24,7 +24,7 @@ public class Bill {
         birthday = b;
         email = e;
         city = c;
-        articles = new ArrayList<Article>();
+        articles = new ArrayList<>();
     }
 
     public boolean addArticle(Article a) {

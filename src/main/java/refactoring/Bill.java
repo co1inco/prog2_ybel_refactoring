@@ -15,15 +15,24 @@ public class Bill {
     public String city;
     public ArrayList<Article> articles;
 
-    public Bill(String cn, String n, String s, String sn, int pc, Date b, String e, String c) {
-        customerName = cn;
-        nickname = n;
-        street = s;
-        streetNumber = sn;
-        postalCode = pc;
-        birthday = b;
-        email = e;
-        city = c;
+    public Bill(
+        String customerName,
+        String nickname,
+        String street,
+        String streetNUmber,
+        int postalCode,
+        Date birthday,
+        String email,
+        String city) {
+
+        this.customerName = customerName;
+        this.nickname = nickname;
+        this.street = street;
+        streetNumber = streetNUmber;
+        this.postalCode = postalCode;
+        this.birthday = birthday;
+        this.email = email;
+        this.city = city;
         articles = new ArrayList<>();
     }
 
@@ -34,45 +43,49 @@ public class Bill {
     public String getDetails() {
         double total = 0;
 
-        String result = "Details for \"" + customerName + "\"\n";
-        result += street + " " + streetNumber + "\n";
-        result += postalCode + " " + city + "\n";
-        result += "Geburtstag: " + birthday + "\n";
-        result += "Email: " + email + "\n\n";
-        result += "refactoring.Article: \n";
+        StringBuilder result = new StringBuilder("Details for \"" + customerName + "\"\n");
+        result.append(street).append(" ").append(streetNumber).append("\n");
+        result.append(postalCode).append(" ").append(city).append("\n");
+        result.append("Geburtstag: ").append(birthday).append("\n");
+        result.append("Email: ").append(email).append("\n\n");
+        result.append("refactoring.Article: \n");
         for (Article article : articles) {
-            double price = 0;
-            if (article.bike instanceof Brompton) {
-                if (article.purchaseAmount > 1) {
-                    price += (article.purchaseAmount - 1) * article.bike.price / 2;
-                }
-                price += article.bike.price * article.purchaseAmount;
-            } else if (article.bike instanceof EBike) {
-                price += article.bike.price * article.purchaseAmount;
-            } else if (article.bike instanceof Mountainbike) {
-                if (article.purchaseAmount > 2) {
-                    price += article.purchaseAmount * article.bike.price * 9 / 10;
-                } else {
-                    price += article.bike.price * article.purchaseAmount;
-                }
-            }
-            if (price > 1000f || price == 1000.0) {
-                price = price * 0.8;
-            }
+            double price = getArticlePrice(article);
 
-            result +=
-                    "\t"
-                            + article.bike.productName
-                            + "\tx\t"
-                            + article.purchaseAmount
-                            + "\t=\t"
-                            + String.valueOf(price)
-                            + "\n";
+            result.append("\t")
+                .append(article.bike().getProductName())
+                .append("\tx\t")
+                .append(article.purchaseAmount())
+                .append("\t=\t")
+                .append(price)
+                .append("\n");
             total += price;
         }
 
-        result += "\nTotal price:\t" + String.valueOf(total) + "\n";
+        result.append("\nTotal price:\t").append(total).append("\n");
 
-        return result;
+        return result.toString();
+    }
+
+    private static double getArticlePrice(Article article) {
+        double price = 0;
+        if (article.bike() instanceof Brompton) {
+            if (article.purchaseAmount() > 1) {
+                price += (article.purchaseAmount() - 1) * article.bike().getPrice() / 2;
+            }
+            price += article.bike().getPrice() * article.purchaseAmount();
+        } else if (article.bike() instanceof EBike) {
+            price += article.bike().getPrice() * article.purchaseAmount();
+        } else if (article.bike() instanceof Mountainbike) {
+            if (article.purchaseAmount() > 2) {
+                price += article.purchaseAmount() * article.bike().getPrice() * 9 / 10;
+            } else {
+                price += article.bike().getPrice() * article.purchaseAmount();
+            }
+        }
+        if (price > 1000f || price == 1000.0) {
+            price = price * 0.8;
+        }
+        return price;
     }
 }

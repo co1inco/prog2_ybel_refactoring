@@ -2,7 +2,13 @@ package refactoring;
 
 public class Brompton extends Bike {
 
-    public Brompton(String pn, double p, int ms, int rgc, int fgc) {
-        super(pn, p, ms, rgc, fgc);
+    public Brompton(
+        String productName,
+        double price,
+        int maxSpeed,
+        int rearGearCount,
+        int frontGearCount) {
+
+        super(productName, price, maxSpeed, rearGearCount, frontGearCount);
     }
 }

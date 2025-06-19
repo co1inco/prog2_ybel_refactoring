@@ -4,9 +4,16 @@ public class EBike extends Bike {
 
     private final int batteryCapacity;
 
-    public EBike(String pn, double p, int ms, int rgc, int fgc, int bc) {
-        super(pn, p, ms, rgc, fgc);
-        this.batteryCapacity = bc;
+    public EBike(
+        String productName,
+        double price,
+        int maxSpeed,
+        int rearGearCount,
+        int frontGearCount,
+        int batteryCapacity) {
+
+        super(productName, price, maxSpeed, rearGearCount, frontGearCount);
+        this.batteryCapacity = batteryCapacity;
     }
 
     @Override

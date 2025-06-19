@@ -2,8 +2,14 @@ package refactoring;
 
 public class Mountainbike extends Bike {
 
-    public Mountainbike(String pn, double p, int ms, int rgc, int fgc) {
-        super(pn, p, ms, rgc, fgc);
+    public Mountainbike(
+        String productName,
+        double price,
+        int maxSpeed,
+        int rearGearCount,
+        int frontGearCount) {
+
+        super(productName, price, maxSpeed, rearGearCount, frontGearCount);
     }
 
 }

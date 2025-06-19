@@ -35,8 +35,12 @@ public class BillTest {
             "sample@email.de",
             "City"
         );
-        bill.addArticle(new Article(new Bike(), 5));
-        bill.addArticle(new Article(new Bike(), 10));
+        bill.addArticle(new Article(
+            new Bike(null, 1, 1, 1, 1),
+            5));
+        bill.addArticle(new Article(
+            new Bike(null, 1, 1, 1, 1),
+            10));
 
         String expected = """
             Details for "Customer"

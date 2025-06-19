@@ -15,15 +15,24 @@ public class Bill {
     public String city;
     public ArrayList<Article> articles;
 
-    public Bill(String cn, String n, String s, String sn, int pc, Date b, String e, String c) {
-        customerName = cn;
-        nickname = n;
-        street = s;
-        streetNumber = sn;
-        postalCode = pc;
-        birthday = b;
-        email = e;
-        city = c;
+    public Bill(
+        String customerName,
+        String nickname,
+        String street,
+        String streetNUmber,
+        int postalCode,
+        Date birthday,
+        String email,
+        String city) {
+
+        this.customerName = customerName;
+        this.nickname = nickname;
+        this.street = street;
+        streetNumber = streetNUmber;
+        this.postalCode = postalCode;
+        this.birthday = birthday;
+        this.email = email;
+        this.city = city;
         articles = new ArrayList<>();
     }
 
@@ -48,12 +57,12 @@ public class Bill {
                 .append("\tx\t")
                 .append(article.purchaseAmount())
                 .append("\t=\t")
-                .append(String.valueOf(price))
+                .append(price)
                 .append("\n");
             total += price;
         }
 
-        result.append("\nTotal price:\t").append(String.valueOf(total)).append("\n");
+        result.append("\nTotal price:\t").append(total).append("\n");
 
         return result.toString();
     }

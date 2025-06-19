@@ -34,29 +34,28 @@ public class Bill {
     public String getDetails() {
         double total = 0;
 
-        String result = "Details for \"" + customerName + "\"\n";
-        result += street + " " + streetNumber + "\n";
-        result += postalCode + " " + city + "\n";
-        result += "Geburtstag: " + birthday + "\n";
-        result += "Email: " + email + "\n\n";
-        result += "refactoring.Article: \n";
+        StringBuilder result = new StringBuilder("Details for \"" + customerName + "\"\n");
+        result.append(street).append(" ").append(streetNumber).append("\n");
+        result.append(postalCode).append(" ").append(city).append("\n");
+        result.append("Geburtstag: ").append(birthday).append("\n");
+        result.append("Email: ").append(email).append("\n\n");
+        result.append("refactoring.Article: \n");
         for (Article article : articles) {
             double price = getArticlePrice(article);
 
-            result +=
-                    "\t"
-                    + article.bike().getProductName()
-                    + "\tx\t"
-                    + article.purchaseAmount()
-                    + "\t=\t"
-                    + String.valueOf(price)
-                    + "\n";
+            result.append("\t")
+                .append(article.bike().getProductName())
+                .append("\tx\t")
+                .append(article.purchaseAmount())
+                .append("\t=\t")
+                .append(String.valueOf(price))
+                .append("\n");
             total += price;
         }
 
-        result += "\nTotal price:\t" + String.valueOf(total) + "\n";
+        result.append("\nTotal price:\t").append(String.valueOf(total)).append("\n");
 
-        return result;
+        return result.toString();
     }
 
     private static double getArticlePrice(Article article) {

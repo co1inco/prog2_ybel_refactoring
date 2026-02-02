@@ -42,18 +42,18 @@ public class Bill {
         result += "refactoring.Article: \n";
         for (Article article : articles) {
             double price = 0;
-            if (article.bike instanceof Brompton) {
-                if (article.purchaseAmount > 1) {
-                    price += (article.purchaseAmount - 1) * article.bike.price / 2;
+            if (article.bike() instanceof Brompton) {
+                if (article.purchaseAmount() > 1) {
+                    price += (article.purchaseAmount() - 1) * article.bike().price / 2;
                 }
-                price += article.bike.price * article.purchaseAmount;
-            } else if (article.bike instanceof EBike) {
-                price += article.bike.price * article.purchaseAmount;
-            } else if (article.bike instanceof Mountainbike) {
-                if (article.purchaseAmount > 2) {
-                    price += article.purchaseAmount * article.bike.price * 9 / 10;
+                price += article.bike().price * article.purchaseAmount();
+            } else if (article.bike() instanceof EBike) {
+                price += article.bike().price * article.purchaseAmount();
+            } else if (article.bike() instanceof Mountainbike) {
+                if (article.purchaseAmount() > 2) {
+                    price += article.purchaseAmount() * article.bike().price * 9 / 10;
                 } else {
-                    price += article.bike.price * article.purchaseAmount;
+                    price += article.bike().price * article.purchaseAmount();
                 }
             }
             if (price > 1000f || price == 1000.0) {
@@ -62,9 +62,9 @@ public class Bill {
 
             result +=
                     "\t"
-                            + article.bike.productName
+                            + article.bike().productName
                             + "\tx\t"
-                            + article.purchaseAmount
+                            + article.purchaseAmount()
                             + "\t=\t"
                             + String.valueOf(price)
                             + "\n";
